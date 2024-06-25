@@ -1,16 +1,16 @@
-<script setup>
-import { ref } from 'vue';
-import { bootcamp_backend } from 'declarations/bootcamp_backend/index';
+<script setup lang="ts">
+import { Ref, ref } from "vue";
+import { bootcamp_backend } from "declarations/bootcamp_backend/index";
+import Blog from "@/components/Blog.vue";
 let greeting = ref('');
 
-let name;
-let age;
+let name: Ref<string> = ref('');
+let age: Ref<number> = ref(0);
 
-async function handleSubmit(e) {
+async function handleSubmit(e: any) {
   e.preventDefault();
-  await bootcamp_backend.greet(name, age).then((response) => {
-    greeting.value = response;
-  });
+  let response = await bootcamp_backend.greet(name, age);
+  greeting.value = response;
 }
 </script>
 
@@ -27,4 +27,6 @@ async function handleSubmit(e) {
     </form>
     <section id="greeting">{{ greeting }}</section>
   </main>
+
+  <Blog/>
 </template>
