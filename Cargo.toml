@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/bootcamp_backend"
+]
+resolver = "2"

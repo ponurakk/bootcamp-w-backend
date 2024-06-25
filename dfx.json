@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "bootcamp_backend": {
+      "candid": "src/bootcamp_backend/bootcamp_backend.did",
+      "package": "bootcamp_backend",
+      "type": "rust"
+    },
+    "bootcamp_frontend": {
+      "dependencies": [
+        "bootcamp_backend"
+      ],
+      "source": [
+        "src/bootcamp_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "bootcamp_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
