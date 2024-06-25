@@ -13,6 +13,13 @@ async function addPost() {
   posts.value = await bootcamp_backend.get_posts();
   console.timeEnd("GetPosts");
 }
+
+async function removePost(index: number) {
+  console.time("RemovePost");
+  await bootcamp_backend.remove_post(index)
+  console.timeEnd("RemovePost");
+  posts.value = await bootcamp_backend.get_posts();
+}
   
 onMounted(async () => {
   posts.value = await bootcamp_backend.get_posts();
@@ -29,7 +36,7 @@ onMounted(async () => {
     <section>
       <h1>POSTS:</h1>
       <div v-for="(post, i) in posts" :key="i">
-        {{ post }}
+        {{ post }} <button @click="removePost(i)">Remove</button>
       </div>
     </section>
   </div>

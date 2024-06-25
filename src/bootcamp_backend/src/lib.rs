@@ -18,3 +18,13 @@ fn add_post(entry: String) {
 fn get_posts() -> Vec<String> {
     POSTS.with_borrow(|v| v.to_owned())
 }
+
+#[ic_cdk::update]
+fn remove_post(index: usize) {
+    POSTS.with_borrow_mut(|v| {
+        let vec = v;
+        if index < vec.len() {
+            vec.remove(index);
+        }
+    });
+}
