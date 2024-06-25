@@ -3,11 +3,12 @@ import { ref } from 'vue';
 import { bootcamp_backend } from 'declarations/bootcamp_backend/index';
 let greeting = ref('');
 
+let name;
+let age;
+
 async function handleSubmit(e) {
   e.preventDefault();
-  const target = e.target;
-  const name = target.querySelector('#name').value;
-  await bootcamp_backend.greet(name).then((response) => {
+  await bootcamp_backend.greet(name, age).then((response) => {
     greeting.value = response;
   });
 }
@@ -20,7 +21,8 @@ async function handleSubmit(e) {
     <br />
     <form action="#" @submit="handleSubmit">
       <label for="name">Enter your name: &nbsp;</label>
-      <input id="name" alt="Name" type="text" />
+      <input id="name" alt="Name" type="text" v-model="name" />
+      <input id="age" alt="Age" type="number" v-model="age" />
       <button type="submit">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
