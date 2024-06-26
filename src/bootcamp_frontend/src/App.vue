@@ -20,10 +20,15 @@ async function handleSubmit(e: any) {
     <br />
     <br />
     <form action="#" @submit="handleSubmit">
-      <label for="name">Enter your name: &nbsp;</label>
-      <input id="name" alt="Name" type="text" v-model="name" />
-      <input id="age" alt="Age" type="number" v-model="age" />
-      <button type="submit">Click Me!</button>
+      <span class="block">
+        <label for="name">Enter your name: </label>
+        <input id="name" alt="Name" type="text" v-model="name" class="p-1" />
+      </span>
+      <span class="block">
+        <label for="age">Enter your age: </label>
+        <input id="age" alt="Age" type="number" v-model="age" class="p-1"/>
+      </span>
+      <button type="submit" class="bg-red-900">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
   </main>

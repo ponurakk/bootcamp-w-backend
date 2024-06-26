@@ -35,16 +35,19 @@ onMounted(async () => {
 
 <template>
   <div>
-    <button @click="clear">Clear</button>
-    <section>
-      <input type="text" v-model="new_post">
-      <button @click="addPost">Add Post</button>
+    <section class="flex gap-3">
+      <input type="text" v-model="new_post" class="px-3 py-1">
+      <button @click="addPost" class="bg-indigo-700 rounded-sm p-1">Add Post</button>
+      <button @click="clear" class="bg-indigo-700 rounded-sm p-1">Clear</button>
     </section>
 
     <section>
       <h1>POSTS:</h1>
-      <div v-for="(post, i) in posts" :key="i">
-        {{ post }} <button @click="removePost(i)">Remove</button>
+      <div class="flex flex-col gap-3 w-1/2 m-auto">
+        <div v-for="(post, i) in posts" :key="i" class="bg-neutral-50 rounded-xl p-4">
+          <div>{{ post }}</div>
+          <button @click="removePost(i)" class="bg-red-900 rounded-sm p-1">Remove</button>
+        </div>
       </div>
     </section>
   </div>
