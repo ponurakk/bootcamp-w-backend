@@ -1,5 +1,7 @@
 use std::cell::RefCell;
 
+use ic_cdk::trap;
+
 thread_local! {
     pub static POSTS: RefCell<Vec<String>> = RefCell::default();
 }
@@ -21,11 +23,12 @@ fn get_posts() -> Vec<String> {
 
 #[ic_cdk::update]
 fn remove_post(index: usize) {
-    POSTS.with_borrow_mut(|v| {
-        let vec = v;
-        if index < vec.len() {
-            vec.remove(index);
+    POSTS.with_borrow_mut(|vec| {
+        if index >= vec.len() {
+            trap(&format!("Index ({}) out of bounds {}.", index, vec.len()));
         }
+
+        vec.remove(index);
     });
 }
 
@@ -33,4 +36,19 @@ fn remove_post(index: usize) {
 fn clear() {
     // POSTS.with(|v| *v.borrow_mut() = Vec::new())
     POSTS.with_borrow_mut(|v| v.clear())
+}
+
+#[ic_cdk::update]
+fn update_post(index: usize, entry: String) {
+    POSTS.with_borrow_mut(|vec| {
+        if index >= vec.len() {
+            trap(&format!("Index ({}) out of bounds {}.", index, vec.len()));
+        }
+
+        if let Some(elem) = vec.get_mut(index) {
+            *elem = entry;
+        } else {
+            trap(&format!("Index with id ({}) doesn't exist.", index));
+        }
+    })
 }
