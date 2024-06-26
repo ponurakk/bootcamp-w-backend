@@ -28,3 +28,9 @@ fn remove_post(index: usize) {
         }
     });
 }
+
+#[ic_cdk::update]
+fn clear() {
+    // POSTS.with(|v| *v.borrow_mut() = Vec::new())
+    POSTS.with_borrow_mut(|v| v.clear())
+}

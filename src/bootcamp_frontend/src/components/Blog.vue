@@ -20,6 +20,13 @@ async function removePost(index: number) {
   console.timeEnd("RemovePost");
   posts.value = await bootcamp_backend.get_posts();
 }
+
+async function clear() {
+  console.time("Clear");
+  await bootcamp_backend.clear()
+  console.timeEnd("Clear");
+  posts.value = [];
+}
   
 onMounted(async () => {
   posts.value = await bootcamp_backend.get_posts();
@@ -28,6 +35,7 @@ onMounted(async () => {
 
 <template>
   <div>
+    <button @click="clear">Clear</button>
     <section>
       <input type="text" v-model="new_post">
       <button @click="addPost">Add Post</button>
